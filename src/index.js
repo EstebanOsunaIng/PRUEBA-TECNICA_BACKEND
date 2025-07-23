@@ -5,6 +5,7 @@ import dbConnect from './config/mongo.config.js'
 
 import pets from "./routes/pets.route.js"
 import appointments from "./routes/appointments.route.js"
+import owner from "./routes/owner.route.js"
 
 
 
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use ( pets );
 app.use ( appointments );
+app.use (owner)
 
 
 

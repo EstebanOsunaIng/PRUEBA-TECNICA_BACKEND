@@ -2,12 +2,13 @@ import petsModel from "../schemas/pets.schema.js"
 
 
 const createPets = async ( req, res ) => {
-    const inputData = req.body        // Extraigo el objeto enviado 
+    const inputData = req.body
+          // Extraigo el objeto enviado 
     
     // Try: Controla las excepciones de la consulta a la base de datos 
     try {
         console.log("holaaa", inputData);
-        const registeredPets = await petsModel.create ( inputData )
+        const registeredPets = await (await petsModel.create ( inputData )).populate(['ownerId'])
 
         console.log ( registeredPets )  // Imprime en la consola
         res.send ( registeredPets )  // Enviando la respuesta al cliente

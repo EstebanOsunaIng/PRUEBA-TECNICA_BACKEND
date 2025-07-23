@@ -16,7 +16,7 @@ const ownerSchema = new mongoose.Schema( {
         unique:[true,"Este email ya esta registrado, por favor introduce un email validos"],
 
     phone: {
-        typeof: Number,
+        typeof: String,
         required:[true, "El telefono del dueño de la mascota es obligatorio"],
     }
     

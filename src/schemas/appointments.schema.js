@@ -1,25 +1,27 @@
-import { text } from 'express';
+
 import mongoose from 'mongoose';
 
 const appointmentsSchema = new mongoose.Schema( {
+
     petsId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'pets'
     },
 
     reason: {
-        type: text,
+        type: String,
         required: [true, 'El motivo de la cita es obligatorio']
     },
 
 
     date:{
-        type: date,
+        type: Date,
         required: [true, 'La fecha de la cita es obligatoria']
     },
 
     veterinarian:{
         type: String,
+        enum: ["Esteban Osuna", "Juan Romero" , "Juan Lopez"],
         required: [ true , 'La asignación del veterinario es obligatorio']
     },
 
