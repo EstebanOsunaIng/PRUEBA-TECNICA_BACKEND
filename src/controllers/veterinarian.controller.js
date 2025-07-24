@@ -1,16 +1,17 @@
-import ownerModel from "../schemas/owner.schemas.js"
+import veterinarianModel from "../schemas/veterinarian.schema.js"
 
 
-const createOwner = async ( req, res ) => {
-    const inputData = req.body        // Extraigo el objeto enviado 
+const createVeterinarian = async ( req, res ) => {
+    const inputData = req.body
+          // Extraigo el objeto enviado 
     
     // Try: Controla las excepciones de la consulta a la base de datos 
     try {
         console.log("holaaa", inputData);
-        const registeredOwner = await ownerModel.create ( inputData )
+        const registeredVeterinarian = await veterinarianModel.create(inputData)
 
-        console.log ( registeredOwner )  // Imprime en la consola
-        res.send ( registeredOwner )  // Enviando la respuesta al cliente
+        console.log ( registeredVeterinarian )  // Imprime en la consola
+        res.send ( registeredVeterinarian )  // Enviando la respuesta al cliente
     }
     catch ( error ) {    // Catch: Captura el error producido por la excepción 
         console.error ( error )
@@ -18,10 +19,10 @@ const createOwner = async ( req, res ) => {
     }
 } 
 
-const getAllOwner = async ( req, res ) => {
+const getAllVeterinarian = async ( req, res ) => {
     
     try {
-        const data = await ownerModel.find ( {} )
+        const data = await veterinarianModel.find ( {} )
         res.json ( data )     
     } 
     catch (error) {
@@ -32,11 +33,11 @@ const getAllOwner = async ( req, res ) => {
     
 }
 
-const getOwnerById = async ( req, res ) => {
-    const ownerId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
+const getVeterinarianById = async ( req, res ) => {
+    const veterinarianId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
     
     try {
-        const data = await ownerModel.findById ( ownerId )
+        const data = await veterinarianModel.findById ( veterinarianId )
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
@@ -51,12 +52,13 @@ const getOwnerById = async ( req, res ) => {
     }
 }
 
-const updateOwnersById = async ( req, res ) => {
-    const ownerId = req.params.id  // Obtenemo el ID de la parametrización de la ruta
+
+const updateVeterinarianById = async ( req, res ) => {
+    const veterinarianId = req.params.id  // Obtenemo el ID de la parametrización de la ruta
     const inputData = req.body   // Obtenemos el body de la petición
     
     try {
-        const data = await ownerModel.findByIdAndUpdate ( ownerId, inputData, { new: true } )
+        const data = await petsModel.findByIdAndUpdate ( veterinarianId, inputData, { new: true } )
 
         res.json ( data )    
     } 
@@ -66,10 +68,11 @@ const updateOwnersById = async ( req, res ) => {
     }
 }
 
+
 // Exponer las funcionalidades para ser usadas por otros archivos
 export {
-    createOwner,
-    getAllOwner,
-    getOwnerById,
-    updateOwnersById
+    createVeterinarian,
+    getAllVeterinarian,
+    getVeterinarianById,
+    updateVeterinarianById
 }

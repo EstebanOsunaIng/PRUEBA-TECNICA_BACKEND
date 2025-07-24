@@ -19,12 +19,11 @@ const appointmentsSchema = new mongoose.Schema( {
         required: [true, 'La fecha de la cita es obligatoria']
     },
 
-    veterinarian:{
-        type: String,
-        enum: ["Esteban Osuna", "Juan Romero" , "Juan Lopez"],
-        required: [ true , 'La asignación del veterinario es obligatorio']
+    veterinarianId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'veterinarian'
     },
-
+    
     state: {
         type: String,
         enum: ["pendiente", "completada"],

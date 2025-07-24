@@ -22,7 +22,7 @@ const createPets = async ( req, res ) => {
 const getAllPets = async ( req, res ) => {
     
     try {
-        const data = await petsModel.find ( {} )
+        const data = await petsModel.find ( {} ).populate(['ownerId'])
         res.json ( data )     
     } 
     catch (error) {
@@ -37,7 +37,7 @@ const getPetsById = async ( req, res ) => {
     const petsId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
     
     try {
-        const data = await petsModel.findById ( petsId )
+        const data = await petsModel.findById ( petsId ).populate(['ownerId'])
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
@@ -58,7 +58,7 @@ const updatePetsById = async ( req, res ) => {
     const inputData = req.body   // Obtenemos el body de la petición
     
     try {
-        const data = await petsModel.findByIdAndUpdate ( petsId, inputData, { new: true } )
+        const data = await petsModel.findByIdAndUpdate ( petsId, inputData, { new: true } ).populate(['ownerId'])
 
         res.json ( data )    
     } 

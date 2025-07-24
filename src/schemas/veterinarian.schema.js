@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ownerSchema = new mongoose.Schema( {
+const veterinarianSchema = new mongoose.Schema( {
 
     name: {
         type: String,
@@ -20,15 +20,12 @@ const ownerSchema = new mongoose.Schema( {
         required:[true, "El telefono del dueño de la mascota es obligatorio"],
     }
     
-}
-}, {
-    timestamps: true, // Agrega las propiedades createdAt , updatedAt
-    versionKey: false // contador __v de modificaciones del schema
-})
+    }
+}, {} )
 
-const ownerModel = mongoose.model (
-    'owner',
-    ownerSchema
+const veterinarianModel = mongoose.model (
+    'veterinarian',
+    veterinarianSchema
 )
 
-export default ownerModel
+export default veterinarianModel
