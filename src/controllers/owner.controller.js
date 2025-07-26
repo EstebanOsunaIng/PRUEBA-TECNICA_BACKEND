@@ -14,7 +14,7 @@ const createOwner = async ( req, res ) => {
     }
     catch ( error ) {    // Catch: Captura el error producido por la excepción 
         console.error ( error )
-        res.status( 500 ).json ( { msg: 'Error al registrar la mascota ' } )
+        res.status( 500 ).json ( { msg: 'Error al registrar el dueño ' } )
     }
 } 
 
@@ -26,7 +26,7 @@ const getAllOwner = async ( req, res ) => {
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo obtener el listado de mascotas' } )        
+        res.json ( { msg: 'Error: No se pudo obtener el listado de dueños' } )        
     }
     
     
@@ -40,16 +40,41 @@ const getOwnerById = async ( req, res ) => {
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
-            return res.json ( { msg: 'La mascota no se encuentra registrado' } )
+            return res.json ( { msg: 'El dueño no se encuentra registrado' } )
         }
         
         res.json ( data )
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo encontrar la mascota' } )
+        res.json ( { msg: 'Error: No se pudo encontrar el dueño' } )
     }
 }
+
+const removeOwnerById = async (req, res) => {
+    const ownerId = req.params.id;
+
+    try{ 
+
+    const data = await ownerModel.findByIdAndDelete (ownerId);
+
+    if(data == null){
+
+            return res.json({msg: 'Error: El dueño no existe'});
+        }
+
+    res.json(data);
+
+    }
+
+    catch (error){
+        console.error( error);
+        res.json({msg: 'Error: No se pudo encontrar el dueño'});
+    }
+}
+
+
+
 
 const updateOwnersById = async ( req, res ) => {
     const ownerId = req.params.id  // Obtenemo el ID de la parametrización de la ruta
@@ -62,7 +87,7 @@ const updateOwnersById = async ( req, res ) => {
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo actualizar al artista' } )
+        res.json ( { msg: 'Error: No se pudo actualizar el dueño' } )
     }
 }
 
@@ -71,5 +96,6 @@ export {
     createOwner,
     getAllOwner,
     getOwnerById,
-    updateOwnersById
+    updateOwnersById, 
+    removeOwnerById
 }

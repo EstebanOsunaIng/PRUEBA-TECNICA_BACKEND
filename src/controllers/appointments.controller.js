@@ -26,7 +26,7 @@ const getAllAppointments = async ( req, res ) => {
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo obtener el listado de mascotas' } )        
+        res.json ( { msg: 'Error: No se pudo obtener el listado de citas' } )        
     }
     
     
@@ -39,16 +39,39 @@ const getAppointmentsByState = async ( req, res ) => {
         const data = await appointmentsModel.find ({state: state}).populate(['petsId', 'veterinarianId'])
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
-            return res.json ( { msg: 'La mascota no se encuentra registrado' } )
+            return res.json ( { msg: 'La cita no se encuentra registrado' } )
         }
         
         res.json ( data )
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo encontrar la mascota' } )
+        res.json ( { msg: 'Error: No se pudo encontrar la cita' } )
     }
 }
+
+const removeAppointmentsById = async (req, res) => {
+    const appointmentsId = req.params.id;
+
+    try{ 
+
+    const data = await appointmentsModel.findByIdAndDelete (appointmentsId);
+
+    if(data == null){
+
+            return res.json({msg: 'Error: La cita no existe'});
+        }
+
+    res.json(data);
+
+    }
+
+    catch (error){
+        console.error( error);
+        res.json({msg: 'Error: No se pudo encontrar la cita'});
+    }
+}
+
 
 const updateAppointmentsById = async ( req, res ) => {
     const appointmentsId = req.params.id  // Obtenemo el ID de la parametrización de la ruta
@@ -61,7 +84,7 @@ const updateAppointmentsById = async ( req, res ) => {
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo actualizar al artista' } )
+        res.json ( { msg: 'Error: No se pudo actualizar la cita' } )
     }
 }
 
@@ -72,5 +95,6 @@ export {
     createAppointments,
     getAppointmentsByState, 
     getAllAppointments,
-    updateAppointmentsById
+    updateAppointmentsById,
+    removeAppointmentsById
 }

@@ -24,6 +24,7 @@ const appointmentsSchema = new mongoose.Schema( {
         ref: 'veterinarian'
     },
     
+
     state: {
         type: String,
         enum: ["pendiente", "completada"],

@@ -14,14 +14,15 @@ const ownerSchema = new mongoose.Schema( {
         required:[true, "El correo del usuario es obligatorio"],
         match:[/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/, 'Por favor, introduce un correo electrónico válido.'],
         unique:[true,"Este email ya esta registrado, por favor introduce un email validos"],
+        },
     
     phone: {
-        typeof: String,
+        type: String,
         required:[true, "El telefono del dueño de la mascota es obligatorio"],
-    }
+    },
     
-}
-}, {
+},
+{
     timestamps: true, // Agrega las propiedades createdAt , updatedAt
     versionKey: false // contador __v de modificaciones del schema
 })

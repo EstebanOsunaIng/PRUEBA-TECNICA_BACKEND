@@ -15,7 +15,7 @@ const createVeterinarian = async ( req, res ) => {
     }
     catch ( error ) {    // Catch: Captura el error producido por la excepción 
         console.error ( error )
-        res.status( 500 ).json ( { msg: 'Error al registrar la mascota ' } )
+        res.status( 500 ).json ( { msg: 'Error al registrar el veterinario ' } )
     }
 } 
 
@@ -27,7 +27,7 @@ const getAllVeterinarian = async ( req, res ) => {
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo obtener el listado de mascotas' } )        
+        res.json ( { msg: 'Error: No se pudo obtener el listado de veterinarios' } )        
     }
     
     
@@ -41,16 +41,39 @@ const getVeterinarianById = async ( req, res ) => {
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
-            return res.json ( { msg: 'La mascota no se encuentra registrado' } )
+            return res.json ( { msg: 'El veterinario no se encuentra registrado' } )
         }
         
         res.json ( data )
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo encontrar la mascota' } )
+        res.json ( { msg: 'Error: No se pudo encontrar el veterinario' } )
     }
 }
+
+const removeVeterinarianById = async (req, res) => {
+    const veterinarianId = req.params.id;
+
+    try{ 
+
+    const data = await veterinarianModel.findByIdAndDelete (veterinarianId);
+
+    if(data == null){
+
+            return res.json({msg: 'Error: El veterinario no existe'});
+        }
+
+    res.json(data);
+
+    }
+
+    catch (error){
+        console.error( error);
+        res.json({msg: 'Error: No se pudo encontrar el veterinario'});
+    }
+}
+
 
 
 const updateVeterinarianById = async ( req, res ) => {
@@ -64,7 +87,7 @@ const updateVeterinarianById = async ( req, res ) => {
     } 
     catch (error) {
         console.error ( error )
-        res.json ( { msg: 'Error: No se pudo actualizar al artista' } )
+        res.json ( { msg: 'Error: No se pudo actualizar el veterinario' } )
     }
 }
 
@@ -74,5 +97,6 @@ export {
     createVeterinarian,
     getAllVeterinarian,
     getVeterinarianById,
-    updateVeterinarianById
+    updateVeterinarianById,
+    removeVeterinarianById
 }

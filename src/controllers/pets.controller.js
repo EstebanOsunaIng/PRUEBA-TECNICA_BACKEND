@@ -52,6 +52,29 @@ const getPetsById = async ( req, res ) => {
     }
 }
 
+const removePetsById = async (req, res) => {
+    const petsId = req.params.id;
+
+    try{ 
+
+    const data = await petsModel.findByIdAndDelete (petsId);
+
+    if(data == null){
+
+            return res.json({msg: 'Error: La mascota no existe'});
+        }
+
+    res.json(data);
+
+    }
+
+    catch (error){
+        console.error( error);
+        res.json({msg: 'Error: No se pudo encontrar la mascota'});
+    }
+}
+
+
 
 const updatePetsById = async ( req, res ) => {
     const petsId = req.params.id  // Obtenemo el ID de la parametrización de la ruta
@@ -74,5 +97,6 @@ export {
     createPets,
     getAllPets,
     getPetsById,
-    updatePetsById
+    updatePetsById,
+    removePetsById
 }
