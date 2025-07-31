@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dbConnect from './config/mongo.config.js'
 
-
+import test from "./routes/test.route.js"
 import pets from "./routes/pets.route.js"
 import appointments from "./routes/appointments.route.js"
 import owner from "./routes/owner.route.js"
@@ -22,7 +22,7 @@ dbConnect()
 
 app.use(cors ());
 app.use(express.json());
-
+app.use(test);
 app.use ( pets );
 app.use ( appointments );
 app.use (owner);
