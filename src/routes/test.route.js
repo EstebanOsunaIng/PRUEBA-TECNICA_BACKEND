@@ -7,3 +7,5 @@ router.get('/', (req, res)=>{
     console.log(msg);
     res.status(200).json({msg});
 })
+
+export default router 
